@@ -1,0 +1,4 @@
+services:
+  plugin.manager.service_link:
+    class: Drupal\service_links\ServiceLinkManager
+    parent: default_plugin_manager
