@@ -9,54 +9,68 @@
  * Implements hook_uninstall().
  */
 function service_links_uninstall() {
-  db_delete('variable')
-    ->condition('name', 'service_links_%', 'LIKE')
-    ->execute();
+  // @FIXME
+// db_delete('variable')
+//     ->condition('name', 'service_links_%', 'LIKE')
+//     ->execute();
+
 }
 
 /**
  * Update from Service Links 1.x.
  */
 function service_links_update_6200() {
-  $new_var = variable_get('service_links_show', NULL);
+  $new_var = \Drupal::config('service_links.settings')->get('service_links_show');
 
   if (!isset($new_var)) {
-    variable_set('service_links_show', array(
-      'delicious' => variable_get('service_links_show_delicious', 0),
-      'digg' => variable_get('service_links_show_digg', 0),
-      'stumbleupon' => variable_get('service_links_show_stumbleupon', 0),
-      'reddit' => variable_get('service_links_show_reddit', 0),
-      'newsvine' => variable_get('service_links_show_newsvine', 0),
-      'furl' => variable_get('service_links_show_furl', 0),
-      'facebook' => variable_get('service_links_show_facebook', 0),
-      'myspace' => variable_get('service_links_show_myspace', 0),
-      'identica' => variable_get('service_links_show_identica', 0),
-      'twitter' => variable_get('service_links_show_twitter', 0),
-      'google' => variable_get('service_links_show_google', 0),
-      'yahoo' => variable_get('service_links_show_yahoo', 0),
-      'linkedin' => variable_get('service_links_show_linkedin', 0),
-      'technorati' => variable_get('service_links_show_technorati', 0),
-      'icerocket' => variable_get('service_links_show_icerocket', 0),
-    ));
+    \Drupal::configFactory()->getEditable('service_links.settings')->set('service_links_show', array(
+      'delicious' => \Drupal::config('service_links.settings')->get('service_links_show_delicious'),
+      'digg' => \Drupal::config('service_links.settings')->get('service_links_show_digg'),
+      'stumbleupon' => \Drupal::config('service_links.settings')->get('service_links_show_stumbleupon'),
+      'reddit' => \Drupal::config('service_links.settings')->get('service_links_show_reddit'),
+      'newsvine' => \Drupal::config('service_links.settings')->get('service_links_show_newsvine'),
+      'furl' => \Drupal::config('service_links.settings')->get('service_links_show_furl'),
+      'facebook' => \Drupal::config('service_links.settings')->get('service_links_show_facebook'),
+      'myspace' => \Drupal::config('service_links.settings')->get('service_links_show_myspace'),
+      'identica' => \Drupal::config('service_links.settings')->get('service_links_show_identica'),
+      'twitter' => \Drupal::config('service_links.settings')->get('service_links_show_twitter'),
+      'google' => \Drupal::config('service_links.settings')->get('service_links_show_google'),
+      'yahoo' => \Drupal::config('service_links.settings')->get('service_links_show_yahoo'),
+      'linkedin' => \Drupal::config('service_links.settings')->get('service_links_show_linkedin'),
+      'technorati' => \Drupal::config('service_links.settings')->get('service_links_show_technorati'),
+      'icerocket' => \Drupal::config('service_links.settings')->get('service_links_show_icerocket'),
+    ))->save();
 
     module_enable(array('general_services'));
   }
 
   // delete old service variables
-  db_delete('variable')
-    ->condition('name', 'service_links_show_%', 'LIKE')
-    ->execute();
+  // @FIXME
+// db_delete('variable')
+//     ->condition('name', 'service_links_show_%', 'LIKE')
+//     ->execute();
+
   
   // Aggregator2 support
-  variable_del('service_links_agg2_link');
+  \Drupal::config('service_links.settings')->clear('service_links_agg2_link')->save();
 }
 
 /**
  * Switch the old variables to the news based on view modes.
  */
 function _update_to_view_modes($old_var, $new_var) {
-  $old_val = variable_get($old_var, 0);
-  $new_val = variable_get($new_var, NULL);
+  // @FIXME
+// // @FIXME
+// // The correct configuration object could not be determined. You'll need to
+// // rewrite this call manually.
+// $old_val = variable_get($old_var, 0);
+
+  // @FIXME
+// // @FIXME
+// // The correct configuration object could not be determined. You'll need to
+// // rewrite this call manually.
+// $new_val = variable_get($new_var, NULL);
+
 
   if (!isset($new_val)) {
     switch($old_val) {
@@ -74,10 +88,20 @@ function _update_to_view_modes($old_var, $new_var) {
       break;
     }
 
-    variable_set($new_var, $modes);
+    // @FIXME
+// // @FIXME
+// // The correct configuration object could not be determined. You'll need to
+// // rewrite this call manually.
+// variable_set($new_var, $modes);
+
   }
 
-  variable_del($old_var);
+  // @FIXME
+// // @FIXME
+// // The correct configuration object could not be determined. You'll need to
+// // rewrite this call manually.
+// variable_del($old_var);
+
 }
 
 /**

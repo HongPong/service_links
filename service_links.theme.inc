@@ -30,23 +30,41 @@ function theme_service_links_build_link($variables) {
         break;
       case SERVICE_LINKS_STYLE_IMAGE:
         $alt_text = t('!name logo', array('!name' => $text));
-        $link = array(
-          'title' => theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)),
-          'href' => $url[0],
-          'query' => $query,
-          'attributes' => $attributes,
-          'html' => TRUE,
-        );
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = array(
+//           'title' => theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)),
+//           'href' => $url[0],
+//           'query' => $query,
+//           'attributes' => $attributes,
+//           'html' => TRUE,
+//         );
+
         break;
       case SERVICE_LINKS_STYLE_IMAGE_AND_TEXT:
         $alt_text = t('!name logo', array('!name' => $text));
-        $link = array(
-          'title' => theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)) .' '. $text,
-          'href' => $url[0],
-          'query' => $query,
-          'attributes' => $attributes,
-          'html' => TRUE,
-        );
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = array(
+//           'title' => theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)) .' '. $text,
+//           'href' => $url[0],
+//           'query' => $query,
+//           'attributes' => $attributes,
+//           'html' => TRUE,
+//         );
+
         break;
       case SERVICE_LINKS_STYLE_EMPTY:
         $link = array(
@@ -58,7 +76,16 @@ function theme_service_links_build_link($variables) {
         );
         break;
       default:
-        $link = theme($style, $variables);
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = theme($style, $variables);
+
     }
   }
   else {
@@ -69,29 +96,71 @@ function theme_service_links_build_link($variables) {
 
     switch ($style) {
       case SERVICE_LINKS_STYLE_TEXT:
-        $link = l($text, $url[0], $attributes);
+        // @FIXME
+// l() expects a Url object, created from a route name or external URI.
+// $link = l($text, $url[0], $attributes);
+
         break;
       case SERVICE_LINKS_STYLE_IMAGE:
         $attributes['html'] = TRUE;
         $alt_text = t('!name logo', array('!name' => $text));
-        $link = l(theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)), $url[0], $attributes);
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = l(theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)), $url[0], $attributes);
+
         break;
       case SERVICE_LINKS_STYLE_IMAGE_AND_TEXT:
         $attributes['html'] = TRUE;
         $alt_text = t('!name logo', array('!name' => $text));
-        $link = l(theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)) .' '. $text, $url[0], $attributes);
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = l(theme('image', array('path' => service_links_expand_path($image), 'alt' => $alt_text)) .' '. $text, $url[0], $attributes);
+
         break;
       case SERVICE_LINKS_STYLE_EMPTY:
         $attributes['html'] = TRUE;
-        $link = l('<span class="element-invisible">' . $text . '</span>', $url[0], $attributes);
+        // @FIXME
+// l() expects a Url object, created from a route name or external URI.
+// $link = l('<span class="element-invisible">' . $text . '</span>', $url[0], $attributes);
+
         break;
       case SERVICE_LINKS_STYLE_FISHEYE:
         $attributes['attributes']['class'] = isset($attributes['attributes']['class']) ? array_merge($attributes['attributes']['class'], array('fisheyeItem')) : array('fisheyeItem');
         $attributes['html'] = TRUE;
-        $link = l(theme('image', array('path' => service_links_expand_path($image, 'fisheye'), 'alt' => $text, 'getsize' => FALSE)) .'<span>'. $text .'</span>', $url[0], $attributes);
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = l(theme('image', array('path' => service_links_expand_path($image, 'fisheye'), 'alt' => $text, 'getsize' => FALSE)) .'<span>'. $text .'</span>', $url[0], $attributes);
+
         break;
       default:
-        $link = theme($style, $variables);
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $link = theme($style, $variables);
+
     }
   }
 
@@ -110,17 +179,38 @@ function theme_service_links_node_format($variables) {
   if ($view_mode == 'rss') {
     $result = array();
     foreach($links as $l) {
-      $result[] = l($l['title'], $l['href'], $l);
+      // @FIXME
+// l() expects a Url object, created from a route name or external URI.
+// $result[] = l($l['title'], $l['href'], $l);
+
     }
 
     return '<div class="service-links">' . implode(' ', $result) . '</div>';
   }
   
   if (isset($label) && !empty($label)) {
-    return '<div class="service-links"><div class="service-label">'. t('@label', array('@label' => $label)) .' </div>'. theme('links', array('links' => $links)) .'</div>';
+    // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// return '<div class="service-links"><div class="service-label">'. t('@label', array('@label' => $label)) .' </div>'. theme('links', array('links' => $links)) .'</div>';
+
   }
   else {
-    return '<div class="service-links">'. theme('links', array('links' => $links)) .'</div>';
+    // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// return '<div class="service-links">'. theme('links', array('links' => $links)) .'</div>';
+
   }
 }
 
@@ -140,7 +230,16 @@ function theme_service_links_block_format($variables) {
       $output = implode(' ', $items);
       break;
     default:
-      $output = theme('item_list', array('items' => array_values($items)));
+      // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $output = theme('item_list', array('items' => array_values($items)));
+
       break;
   }
 
@@ -153,9 +252,33 @@ function theme_service_links_block_format($variables) {
 function theme_service_links_fisheye_format($variables) {
   $items = $variables['items'];
 
-  drupal_add_js(service_links_expand_path('interface.js', 'javascript'), array('weight' => 90));
-  drupal_add_js(service_links_expand_path('service_links_fisheye.js', 'javascript'), array('weight' => 90));
-  drupal_add_css(service_links_expand_path('service_links_fisheye.css', 'css'));
+  // @FIXME
+// The Assets API has totally changed. CSS, JavaScript, and libraries are now
+// attached directly to render arrays using the #attached property.
+// 
+// 
+// @see https://www.drupal.org/node/2169605
+// @see https://www.drupal.org/node/2408597
+// drupal_add_js(service_links_expand_path('interface.js', 'javascript'), array('weight' => 90));
+
+  // @FIXME
+// The Assets API has totally changed. CSS, JavaScript, and libraries are now
+// attached directly to render arrays using the #attached property.
+// 
+// 
+// @see https://www.drupal.org/node/2169605
+// @see https://www.drupal.org/node/2408597
+// drupal_add_js(service_links_expand_path('service_links_fisheye.js', 'javascript'), array('weight' => 90));
+
+  // @FIXME
+// The Assets API has totally changed. CSS, JavaScript, and libraries are now
+// attached directly to render arrays using the #attached property.
+// 
+// 
+// @see https://www.drupal.org/node/2169605
+// @see https://www.drupal.org/node/2408597
+// drupal_add_css(service_links_expand_path('service_links_fisheye.css', 'css'));
+
 
   return "<div class=\"fisheye\"><div class=\"fisheyeContainer\">\r\n". implode("\r\n", $items) ."\r\n</div></div>";
 }

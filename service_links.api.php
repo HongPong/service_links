@@ -55,7 +55,12 @@ function hook_service_links() {
  */
 function my_service_preset(&$service, &$settings, $node = NULL) {
   $settings['tags']['new-tag'] = '<new-tag>';
-  $settings['subst']['new-tag'] = check_plain(variable_get('some_variable', 'default'));
+  // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// $settings['subst']['new-tag'] = check_plain(variable_get('some_variable', 'default'));
+
 }
 
 /**

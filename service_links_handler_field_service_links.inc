@@ -37,6 +37,15 @@ class service_links_handler_field_service_links extends views_handler_field {
       $node = NULL;
     }
 
-    return theme('links', array('links' => service_links_render($node, TRUE)));
+    // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// return theme('links', array('links' => service_links_render($node, TRUE)));
+
   }
 }

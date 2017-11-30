@@ -22,10 +22,19 @@
  * selected services.
  */
 function themename_preprocess_page(&$vars) {
-  if (module_exists('service_links')) {
+  if (\Drupal::moduleHandler()->moduleExists('service_links')) {
     // Works also for not-node pages
-    if (user_access('access service links') && service_links_show($vars['node'])) {
-      $vars['service_links_rendered'] = theme('links', array('links' => service_links_render($vars['node'])));
+    if (\Drupal::currentUser()->hasPermission('access service links') && service_links_show($vars['node'])) {
+      // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $vars['service_links_rendered'] = theme('links', array('links' => service_links_render($vars['node'])));
+
     }
   }
 }
@@ -36,9 +45,18 @@ function themename_preprocess_page(&$vars) {
  * (i.e. twitter).
  */
 function themename_preprocess_node(&$vars) {
-  if (module_exists('service_links')) {
-    if (user_access('access service links') && service_links_show($vars['node'])) {
-      $vars['twitter'] = theme('links', array('links' => service_links_render_some('twitter', $vars['node'])));
+  if (\Drupal::moduleHandler()->moduleExists('service_links')) {
+    if (\Drupal::currentUser()->hasPermission('access service links') && service_links_show($vars['node'])) {
+      // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $vars['twitter'] = theme('links', array('links' => service_links_render_some('twitter', $vars['node'])));
+
     }
   }  
 }
@@ -49,16 +67,34 @@ function themename_preprocess_node(&$vars) {
 function themename_preprocess(&$vars, $hook) {
   switch ($hook) {
     case 'node':
-      if (module_exists('service_links')) {
-        if (user_access('access service links') && service_links_show($vars['node'])) {
-          $vars['twitter'] = theme('links', array('links' => service_links_render_some('twitter', $vars['node'])));
+      if (\Drupal::moduleHandler()->moduleExists('service_links')) {
+        if (\Drupal::currentUser()->hasPermission('access service links') && service_links_show($vars['node'])) {
+          // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $vars['twitter'] = theme('links', array('links' => service_links_render_some('twitter', $vars['node'])));
+
         }
       }
       break;
     case 'page':
-      if (module_exists('service_links')) {
-        if (user_access('access service links') && service_links_show($vars['node'])) {
-          $vars['service_links'] = theme('links', array('links' => service_links_render($vars['node'])));
+      if (\Drupal::moduleHandler()->moduleExists('service_links')) {
+        if (\Drupal::currentUser()->hasPermission('access service links') && service_links_show($vars['node'])) {
+          // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $vars['service_links'] = theme('links', array('links' => service_links_render($vars['node'])));
+
         }
       }
       break;

@@ -23,7 +23,7 @@ $plugin = array(
  */
 function service_links_service_links_content_type_render($subtype, $conf, $panel_args, &$context) {
   $content = NULL;
-  $node = menu_get_object('node');
+  $node = \Drupal::routeMatch()->getParameter('node');
 
   $style = $conf['service_links_block_style'];
   $panel_services = array();
@@ -39,15 +39,33 @@ function service_links_service_links_content_type_render($subtype, $conf, $panel
   if (isset($node)) {
     switch ($conf['service_links_style']) {
       case 'service_links':
-        $content = theme('service_links_block_format', array(
-          'items' => panel_service_links_render($node, FALSE, $style, $panel_services),
-          'style' => $style)
-        );
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $content = theme('service_links_block_format', array(
+//           'items' => panel_service_links_render($node, FALSE, $style, $panel_services),
+//           'style' => $style)
+//         );
+
         break;
       case 'service_links_fisheye':
-        $content = theme('service_links_fisheye_format', array(
-          'items' => panel_service_links_render($node, FALSE, SERVICE_LINKS_STYLE_FISHEYE, $panel_services))
-        );
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $content = theme('service_links_fisheye_format', array(
+//           'items' => panel_service_links_render($node, FALSE, SERVICE_LINKS_STYLE_FISHEYE, $panel_services))
+//         );
+
         break;
     }
   }
@@ -56,17 +74,35 @@ function service_links_service_links_content_type_render($subtype, $conf, $panel
       case 'service_links':
         $options = array(
           'style' => $style,
-          'link_to_front' => variable_get('service_links_block_not_node_front', FALSE),
+          'link_to_front' => \Drupal::config('service_links.settings')->get('service_links_block_not_node_front'),
         );
-        $content = theme('service_links_block_format', array(
-          'items' => panel_service_links_render(NULL, FALSE, $options, $panel_services),
-          'style' => $style,
-            ));
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $content = theme('service_links_block_format', array(
+//           'items' => panel_service_links_render(NULL, FALSE, $options, $panel_services),
+//           'style' => $style,
+//             ));
+
         break;
       case 'service_links_fisheye':
-        $content = theme('service_links_fisheye_format', array(
-          'items' => panel_service_links_render(NULL, FALSE, SERVICE_LINKS_STYLE_FISHEYE, $panel_services))
-        );
+        // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $content = theme('service_links_fisheye_format', array(
+//           'items' => panel_service_links_render(NULL, FALSE, SERVICE_LINKS_STYLE_FISHEYE, $panel_services))
+//         );
+
         break;
     }
   }
@@ -126,7 +162,12 @@ function panel_service_links_render($node, $nodelink = FALSE, $options = NULL, $
  * The form to add or edit a service_links as content.
  */
 function service_links_service_links_content_type_edit_form($form, &$form_state) {
-  ctools_include('plugins');
+  // @FIXME
+// Most CTools APIs have been moved into core.
+// 
+// @see https://www.drupal.org/node/2164623
+// ctools_include('plugins');
+
   $conf = $form_state['conf'];
 
   $form['service_links_style'] = array(
@@ -170,17 +211,26 @@ function service_links_service_links_content_type_edit_form($form, &$form_state)
       'path' => isset($service['icon']) ? service_links_expand_path($service['icon'], 'preset') : service_links_expand_path("$service_id.png", +'preset'),
     );
 
-    $form[$service_id] = array(
-      '#service' => ucwords(str_replace('_', ' ', $service['module'])),
-      '#type' => 'checkbox',
-      '#title' => theme('image', $icon) . " " . t('Show %name link', array('%name' => $service['name'])),
-      '#return_value' => 1,
-      '#default_value' => isset($conf[$service_id]) ? $conf[$service_id] : 0,
-    );
+    // @FIXME
+// theme() has been renamed to _theme() and should NEVER be called directly.
+// Calling _theme() directly can alter the expected output and potentially
+// introduce security issues (see https://www.drupal.org/node/2195739). You
+// should use renderable arrays instead.
+// 
+// 
+// @see https://www.drupal.org/node/2195739
+// $form[$service_id] = array(
+//       '#service' => ucwords(str_replace('_', ' ', $service['module'])),
+//       '#type' => 'checkbox',
+//       '#title' => theme('image', $icon) . " " . t('Show %name link', array('%name' => $service['name'])),
+//       '#return_value' => 1,
+//       '#default_value' => isset($conf[$service_id]) ? $conf[$service_id] : 0,
+//     );
+
   }
 
   if (empty($services)) {
-    drupal_set_message(t('You need to load at least one of XXX Services module, please enable them in <a href="@url">admin > modules</a> page', +array('@url' => url('admin/modules'))), 'warning');
+    drupal_set_message(t('You need to load at least one of XXX Services module, please enable them in <a href="@url">admin > modules</a> page', +array('@url' => \Drupal\Core\Url::fromRoute('system.modules_list'))), 'warning');
   }
 
   return $form;
